@@ -1,5 +1,3 @@
-a = 1
-y = 3
-e = a + y
-
-e / 2
+x = 'scythe is kool'
+y = 'scythe is not kool'
+x +  '                                                                 ' + y
