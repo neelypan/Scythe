@@ -1,6 +1,5 @@
 from sly import Lexer, Parser
 
-
 class SLexer(Lexer):
 	tokens = {ID, NUMBER}
 	ignore = '\r \t'
