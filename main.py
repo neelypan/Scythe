@@ -57,9 +57,11 @@ class SParser(Parser):
 	def statement(self, p):
 		self.names[p.ID] = p.expr
 
+
 	@_('expr')
 	def statement(self, p):
 		pass
+
 
 	@_('DATATYPE "(" expr ")" ')
 	def expr(self, p):
@@ -68,7 +70,7 @@ class SParser(Parser):
 		typ = typ.replace('>', '')
 		typ = typ.replace('\'', '')
 		return typ
-
+		
 	@_('INT "(" expr ")" ')
 	def expr(self, p):
 		return int(p.expr)
@@ -92,7 +94,7 @@ class SParser(Parser):
 		except TypeError:
 			return f'Unsupported data type \'-\' for {p.expr0} and {p.expr1}'
 
-	@_('expr "*" expr ";" ')
+	@_('expr "*" expr ')
 	def expr(self, p):
 		return p.expr0 * p.expr1
 
