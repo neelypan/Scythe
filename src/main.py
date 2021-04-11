@@ -156,7 +156,7 @@ if __name__ == '__main__':
     lexer = SLexer()
     parser = SParser()
 
-    scythe_file = open('main.scy', 'r')
+    scythe_file = open('src/main.scy', 'r')
 
     lines = scythe_file.readlines()
     for i in lines:
