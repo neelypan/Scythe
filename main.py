@@ -1,3 +1,9 @@
+'''
+Made by IMightBeMe and IMayBeMe on replit.com.
+
+Source code is available on github at https://github.com/IMightBeMe/Scythe and replit at https://replit.com/@IMightBeMe/Scythe?v=1 
+'''
+
 from sly import Lexer, Parser
 import glob
 
