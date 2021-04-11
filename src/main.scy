@@ -1,2 +1,1 @@
-x = 1
-str(x)
+if 3 > 2; syout(3); else; syout(4);
