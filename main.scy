@@ -1,3 +1,2 @@
-x = 'scythe is kool'
-y = 'scythe is amazing'
-x +  ' ' + y
+x = 1
+str(x)
