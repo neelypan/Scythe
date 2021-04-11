@@ -1,7 +1,7 @@
 '''
 Made by IMightBeMe and IMayBeMe on replit.com.
 
-Source code is available on github at https://github.com/IMightBeMe/Scythe and replit at https://replit.com/@IMightBeMe/Scythe?v=1 
+Source code is available on github at https://github.com/IMightBeMe/Scythe and replit at https://replit.com/@IMightBeMe/Scythe?v=1
 '''
 
 from sly import Lexer, Parser
@@ -57,8 +57,8 @@ class SParser(Parser):
     def __init__(self):
         self.names = {}
 
+# still is being worked on please ignore the mess i made
 
-	# still is being worked on please ignore the mess i made
     @_('IF condition ";" statement ";" ELSE ";" statement ";" ')
     def statement(self, p):
         # print(p.condition)
