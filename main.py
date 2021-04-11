@@ -57,11 +57,9 @@ class SParser(Parser):
 	def statement(self, p):
 		self.names[p.ID] = p.expr
 
-
 	@_('expr')
 	def statement(self, p):
 		pass
-
 
 	@_('DATATYPE "(" expr ")" ')
 	def expr(self, p):
@@ -70,7 +68,7 @@ class SParser(Parser):
 		typ = typ.replace('>', '')
 		typ = typ.replace('\'', '')
 		return typ
-		
+
 	@_('INT "(" expr ")" ')
 	def expr(self, p):
 		return int(p.expr)
