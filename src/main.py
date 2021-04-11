@@ -1,7 +1,7 @@
 '''
 Made by IMightBeMe and IMayBeMe on replit.com.
 
-Source code is available on github at https://github.com/IMightBeMe/Scythe and replit at https://replit.com/@IMightBeMe/Scythe?v=1
+Source code is available on github at https://github.com/IMightBeMe/Scythe and replit at https://replit.com/@IMightBeMe/Scythe?v=1 
 '''
 
 from sly import Lexer, Parser
@@ -9,17 +9,19 @@ import glob
 
 
 class SLexer(Lexer):
-    tokens = {ID, NUMBER, STRING, SYOUT, DATATYPE, STR, INT}
+    tokens = {ID, NUMBER, STRING, SYOUT, DATATYPE, STR, INT, IF, ELSE}
     ignore = '\r \t'
     ignore_comment = r'\//.*'
-    literals = {'=', '+', '-', '*', '/', '(', ')'}
+    literals = {'=', '+', '-', '*', '/', '(', ')', '<', '>', ';'}
 
     # Tokens
     ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
     ID['syout'] = SYOUT
     ID['datatype'] = DATATYPE
-    ID['string'] = STR
+    ID['str'] = STR
     ID['int'] = INT
+    ID['if'] = IF
+    ID['else'] = ELSE
 
     @_(r'\d+')
     def NUMBER(self, t):
@@ -55,17 +57,38 @@ class SParser(Parser):
     def __init__(self):
         self.names = {}
 
-    @_('SYOUT "(" expr ")" ')
+
+	# still is being worked on please ignore the mess i made
+    @_('IF condition ";" statement ";" ELSE ";" statement ";" ')
     def statement(self, p):
-        print(p.expr)
+        # print(p.condition)
+        # print(p.statement0)
+        # print(p.statement1)
+        pass
 
     @_('ID "=" expr')
     def statement(self, p):
         self.names[p.ID] = p.expr
 
+    @_('print')
+    def statement(self, p):
+        print(p.print)
+
     @_('expr')
     def statement(self, p):
         pass
+
+    @_('condition')
+    def statement(self, p):
+        pass
+
+    @_('SYOUT "(" expr ")" ')
+    def print(self, p):
+        return p.expr
+
+    @_('expr ">" expr')
+    def condition(self, p):
+        return p.expr0 > p.expr1
 
     @_('DATATYPE "(" expr ")" ')
     def expr(self, p):
@@ -129,7 +152,6 @@ class SParser(Parser):
         except LookupError:
             return f'Undefined name {p.ID} '
 
-
 if __name__ == '__main__':
     lexer = SLexer()
     parser = SParser()
@@ -139,6 +161,4 @@ if __name__ == '__main__':
     lines = scythe_file.readlines()
     for i in lines:
         if i:
-            for tok in lexer.tokenize(i):
-                print(tok)
             parser.parse(lexer.tokenize(i))
