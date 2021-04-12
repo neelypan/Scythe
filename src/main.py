@@ -12,7 +12,7 @@ class SLexer(Lexer):
 	tokens = {ID, NUMBER, STRING, SYOUT, DATATYPE, STR, INT, IF, ELSE}
 	ignore = '\r \t'
 	ignore_comment = r'\//.*'
-	literals = {'=', '+', '-', '*', '/', '(', ')', '<', '>', ';'}
+	literals = {'=', '+', '-', '*', '/', '(', ')', '<', '>', ';', '{', '}'}
 
 	# Tokens
 	ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -59,7 +59,7 @@ class SParser(Parser):
 
 # still is being worked on please ignore the mess i made
 
-	@_('IF condition ";" statement ";" ELSE ";" statement ";" ')
+	@_('IF "(" condition ")" "{" statement "}" ELSE "{" statement "}" ')
 	def statement(self, p):
 		# print(p.condition)
 		# print(p.statement0)
