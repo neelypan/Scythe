@@ -12,7 +12,7 @@ class SLexer(Lexer):
 	tokens = {ID, NUMBER, STRING, SYOUT, DATATYPE, STR, INT, IF, ELSE}
 	ignore = '\r \t'
 	ignore_comment = r'\//.*'
-	literals = {'=', '+', '-', '*', '/', '(', ')', '<', '>', ';', '{', '}'}
+	literals = {'=', '+', '-', '*', '/', '(', ')', '<', '>', '{', '}'}
 
 	# Tokens
 	ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -57,22 +57,14 @@ class SParser(Parser):
 	def __init__(self):
 		self.names = {}
 
-# still is being worked on please ignore the mess i made
 
 	@_('IF "(" condition ")" "{" statement "}" ELSE "{" statement "}" ')
 	def statement(self, p):
-		# print(p.condition)
-		# print(p.statement0)
-		# print(p.statement1)
 		pass
 
 	@_('ID "=" expr')
 	def statement(self, p):
 		self.names[p.ID] = p.expr
-
-	@_('print')
-	def statement(self, p):
-		print(p.print)
 
 	@_('expr')
 	def statement(self, p):
@@ -83,8 +75,8 @@ class SParser(Parser):
 		pass
 
 	@_('SYOUT "(" expr ")" ')
-	def print(self, p):
-		return p.expr
+	def statement(self, p):
+		print(p.expr)
 
 	@_('expr ">" expr')
 	def condition(self, p):
@@ -104,7 +96,6 @@ class SParser(Parser):
 
 	@_('STR "(" expr ")" ')
 	def expr(self, p):
-		print(p.expr)
 		return str(p.expr)
 
 	@_('expr "+" expr')
@@ -162,4 +153,6 @@ if __name__ == '__main__':
 	lines = scythe_file.readlines()
 	for i in lines:
 		if i:
+			for tok in lexer.tokenize(i):
+				print(tok)
 			parser.parse(lexer.tokenize(i))
