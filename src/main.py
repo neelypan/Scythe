@@ -9,12 +9,12 @@ import glob
 
 
 class SLexer(Lexer):
-	tokens = {ID, NUMBER, STRING, SYOUT, DATATYPE, STR, INT, IF, ELSE}
+	tokens = {ID, NUMBER, STRING, SYOUT, DATATYPE, STR, INT, IF, ELSE, COMMENT}
 	ignore = '\r \t'
-	ignore_comment = r'\//.*'
 	literals = {'=', '+', '-', '*', '/', '(', ')', '<', '>', '{', '}'}
 
 	# Tokens
+	COMMENT = r'\//.*'
 	ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
 	ID['syout'] = SYOUT
 	ID['datatype'] = DATATYPE
@@ -57,10 +57,13 @@ class SParser(Parser):
 	def __init__(self):
 		self.names = {}
 
+	@_('COMMENT')
+	def statement(self, p):
+		pass
 
 	@_('IF "(" condition ")" "{" statement "}" ELSE "{" statement "}" ')
 	def statement(self, p):
-		pass
+		print(p.statement1)
 
 	@_('ID "=" expr')
 	def statement(self, p):
@@ -153,6 +156,4 @@ if __name__ == '__main__':
 	lines = scythe_file.readlines()
 	for i in lines:
 		if i:
-			for tok in lexer.tokenize(i):
-				print(tok)
 			parser.parse(lexer.tokenize(i))
