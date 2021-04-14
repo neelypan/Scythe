@@ -9,7 +9,7 @@ import glob
 
 
 class SLexer(Lexer):
-	tokens = {ID, NUMBER, STRING, SYOUT, DATATYPE, STR, INT, IF, ELSE, COMMENT}
+	tokens = {ID, NUMBER, STRING, SYOUT, SYIN, DATATYPE, STR, INT, IF, ELSE, COMMENT}
 	ignore = '\r \t'
 	literals = {'=', '+', '-', '*', '/', '(', ')', '<', '>', '{', '}'}
 
@@ -17,6 +17,7 @@ class SLexer(Lexer):
 	COMMENT = r'\//.*'
 	ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
 	ID['syout'] = SYOUT
+	ID['syin'] = SYIN
 	ID['datatype'] = DATATYPE
 	ID['str'] = STR
 	ID['int'] = INT
@@ -63,7 +64,7 @@ class SParser(Parser):
 
 	@_('IF "(" condition ")" "{" statement "}" ELSE "{" statement "}" ')
 	def statement(self, p):
-		print(p.statement1)
+		print('DEBUG:', p.condition, p.statement0, p.statement1)
 
 	@_('ID "=" expr')
 	def statement(self, p):
@@ -147,11 +148,13 @@ class SParser(Parser):
 			return f'Undefined name {p.ID} '
 
 
+class SExecute()
+
 if __name__ == '__main__':
 	lexer = SLexer()
 	parser = SParser()
 
-	scythe_file = open('src/main.scy', 'r')
+	scythe_file = open('src/main.sy', 'r')
 
 	lines = scythe_file.readlines()
 	for i in lines:
