@@ -3,3 +3,4 @@ pyproject.toml
 plan.draw
 .replit
 tempCodeRunnerFile.py
+__pycache__/
