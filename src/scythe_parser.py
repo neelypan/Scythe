@@ -25,6 +25,7 @@ class SParser(Parser):
 
 	@_('ID "=" expr')
 	def statement(self, p):
+		self.names[p.ID] = p.expr[1]
 		return ('var_assign', p.ID, p.expr)
 
 	@_('expr')
@@ -101,5 +102,5 @@ class SParser(Parser):
 	def expr(self, p):
 		try:
 			return ('var', self.names[p.ID])
-		except LookupError:
-			return f'Undefined name {p.ID} '
+		except:
+			return f'Undefined name {p.ID}'

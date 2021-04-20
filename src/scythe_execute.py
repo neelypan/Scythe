@@ -11,7 +11,6 @@ class SExecute:
 			print(result)
 
 	def walkTree(self, node):
-
 		if isinstance(node, int):
 			return node
 		if isinstance(node, str):
@@ -53,4 +52,5 @@ class SExecute:
 				return "Undefined variable '" + node[1] + "' found!"
 
 		if node[0] == 'syout':
-				print(node[1])
+				print(node[1][1])
+
