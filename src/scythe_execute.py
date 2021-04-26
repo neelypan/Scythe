@@ -3,6 +3,7 @@ from sly.yacc import _unique_names
 
 class SExecute:
 	def __init__(self, tree, names):
+		print(tree)
 		self.names = names
 		result = self.walkTree(tree)
 		if result is not None and isinstance(result, int):
@@ -40,17 +41,18 @@ class SExecute:
 			return self.walkTree(node[1]) * self.walkTree(node[2])
 		elif node[0] == 'div':
 			return self.walkTree(node[1]) / self.walkTree(node[2])
+		
+		if node[0] == 'var':
+			try:
+				print(self.names[node[1]])
+			except LookupError:
+				return "Undefined variable '" + node[1] + "' found!"
 
 		if node[0] == 'var_assign':
 			self.names[node[1]] = self.walkTree(node[2])
 			return node[1]
 
-		if node[0] == 'var':
-			try:
-				self.names[node[1]]
-			except LookupError:
-				return "Undefined variable '" + node[1] + "' found!"
-
 		if node[0] == 'syout':
-				print(node[1][1])
+			pass
+			# print(self.names[node[1][1]])
 

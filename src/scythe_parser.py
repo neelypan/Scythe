@@ -44,13 +44,13 @@ class SParser(Parser):
 	# def condition(self, p):
 	#     return p.expr0 > p.expr1
 
-	@_('DATATYPE "(" expr ")" ')
-	def expr(self, p):
+	# @_('DATATYPE "(" expr ")" ')
+	# def expr(self, p):
 		# typ = str(type(p.expr))
 		# typ = typ.replace('<class ', '')
 		# typ = typ.replace('>', '')
 		# typ = typ.replace('\'', '')
-		return ('datatype', p.expr)
+		# return ('datatype', p.expr)
 
 	@_('INT "(" expr ")" ')
 	def expr(self, p):
@@ -101,6 +101,6 @@ class SParser(Parser):
 	@_('ID')
 	def expr(self, p):
 		try:
-			return ('var', self.names[p.ID])
+			return ('var', p.ID)
 		except:
 			return f'Undefined name {p.ID}'

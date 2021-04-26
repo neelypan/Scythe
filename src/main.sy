@@ -1,2 +1,2 @@
-x = 4 + 4
-syout(x)
+x = 4 + 1
+syout(x + 3)
