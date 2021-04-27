@@ -10,14 +10,16 @@ from scythe_execute import SExecute
 
 
 if __name__ == '__main__':
-    lexer = SLexer()
-    parser = SParser()
-    names = {}
+	lexer = SLexer()
+	parser = SParser()
+	names = {}
 
-    scythe_file = open('src/main.sy', 'r')
+	scythe_file = open('src/main.sy', 'r')
 
-    lines = scythe_file.readlines()
-    for i in lines:
-        if i:
-            tree = parser.parse(lexer.tokenize(i))
-            SExecute(tree, names)
+	lines = scythe_file.readlines()
+	for i in lines:
+		if i:
+			tree = parser.parse(lexer.tokenize(i))
+			print(lexer.tokenize(i))
+			SExecute(tree, names)
+			

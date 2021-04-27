@@ -1,2 +1,6 @@
-x = 4 + 1
-syout(x + 3)
+x = '2'
+y = int(x)
+syout(datatype(y))
+z = 3
+bob = 5
+syout(bob > z)
