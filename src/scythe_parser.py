@@ -9,9 +9,7 @@ class SParser(Parser):
     precedence = (
         ('left', '+', '-'),
         ('left', '*', '/'),
-        ('right', 'UMINUS', '<', '>'),
-        ('right', '<=', '>='),
-    )
+        ('right', 'UMINUS', '<', '>'))
 
     def __init__(self):
         self.names = {}
@@ -45,11 +43,11 @@ class SParser(Parser):
     def expr(self, p):
         return ('less', p.expr0, p.expr1)
 
-    @_('expr "<=" expr')
+    @_('expr GREATER_OR_EQUAL expr')
     def expr(self, p):
         return ('less_or_equal', p.expr0, p.expr1)
 
-    @_('expr ">=" expr')
+    @_('expr LESS_OR_EQUAL expr')
     def expr(self, p):
         return ('greater_or_equal', p.expr0, p.expr1)
 

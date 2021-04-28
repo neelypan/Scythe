@@ -6,9 +6,11 @@ class SLexer(Lexer):
               DATATYPE, STR, INT, IF, ELSE, COMMENT, LESS_OR_EQUAL, GREATER_OR_EQUAL}
     ignore = '\r \t'
     literals = {'=', '+', '-', '*', '/',
-                '(', ')', '<', '>', '<=', '>=', '{', '}'}
+                '(', ')', '<', '>', '{', '}'}
 
     # Tokens
+    GREATER_OR_EQUAL = r'>='
+    LESS_OR_EQUAL = r'<='
     COMMENT = r'\//.*'
     ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
     ID['syout'] = SYOUT
