@@ -2,3 +2,7 @@ y = 4;
 syout(datatype(str(y)));
 if (3 > 2) {x = 'kool'} else {x = 'pog'};
 syout(x);
+
+if (3 >= 1) {x = 'kool'} else {if (3 <= 1) {x = 'weird'}};
+
+syout(x);
