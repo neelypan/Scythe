@@ -1,6 +1,4 @@
-x = '2'
-y = int(x)
-syout(datatype(y))
-z = 3
-bob = 5
-syout(bob > z)
+y = 4;
+syout(datatype(str(y)));
+if (3 > 2) {x = 'kool'} else {x = 'pog'};
+syout(x);

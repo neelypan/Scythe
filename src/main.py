@@ -15,11 +15,9 @@ if __name__ == '__main__':
 	names = {}
 
 	scythe_file = open('src/main.sy', 'r')
-
-	lines = scythe_file.readlines()
+	lines = scythe_file.read().split(';')
 	for i in lines:
 		if i:
 			tree = parser.parse(lexer.tokenize(i))
-			print(lexer.tokenize(i))
 			SExecute(tree, names)
 			

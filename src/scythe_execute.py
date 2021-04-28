@@ -44,6 +44,8 @@ class SExecute:
 			return self.walkTree(node[1]) > self.walkTree(node[2])
 		elif node[0] == 'less':
 			return self.walkTree(node[1]) < self.walkTree(node[2])
+		elif node[0] == 'less_or_equal':
+			return self.walkTree(node[1]) <= self.walkTree(node[2])
 
 		if node[0] == 'var_assign':
 			self.names[node[1]] = self.walkTree(node[2])
@@ -67,3 +69,9 @@ class SExecute:
 	
 		if node[0] == 'str_con':
 			return str(self.walkTree(node[1]))
+		
+		if node[0] == 'compare':
+			if self.walkTree(node[1]):
+				return self.walkTree(node[2])
+			else:
+				return self.walkTree(node[3])

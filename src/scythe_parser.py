@@ -9,7 +9,7 @@ class SParser(Parser):
 	precedence = (
 		('left', '+', '-'),
 		('left', '*', '/'),
-		('right', 'UMINUS'),
+		('right', 'UMINUS', '<', '>', '<=', '>='),
 	)
 
 	def __init__(self):
@@ -19,9 +19,9 @@ class SParser(Parser):
 	def statement(self, p):
 		pass
 
-	# @_('IF "(" condition ")" "{" statement "}" ELSE "{" statement "}" ')
-	# def statement(self, p):
-	#     print('DEBUG:', p.condition, p.statement0, p.statement1)
+	@_('IF "(" expr ")" "{" statement "}" ELSE "{" statement "}" ')
+	def statement(self, p):
+		return ('compare', p.expr, p.statement0, p.statement1)
 
 	@_('ID "=" expr')
 	def statement(self, p):
@@ -32,21 +32,25 @@ class SParser(Parser):
 	def statement(self, p):
 		return (p.expr)
 
-	@_('condition')
-	def statement(self, p):
-		return (p.condition)
-
 	@_('SYOUT "(" expr ")" ')
 	def statement(self, p):
 		return ('syout', p.expr)
 
 	@_('expr ">" expr')
-	def condition(self, p):
+	def expr(self, p):
 		return ('greater', p.expr0, p.expr1)
 
 	@_('expr "<" expr')
-	def condition(self, p):
+	def expr(self, p):
 		return ('less', p.expr0, p.expr1)
+
+	@_('expr "<=" expr')
+	def expr(self, p):
+		return ('less_or_equal', p.expr0, p.expr1)
+
+	@_('expr ">=" expr')
+	def expr(self, p):
+		return ('greater_or_equal', p.expr0, p.expr1)
 
 	@_('DATATYPE "(" expr ")" ')
 	def expr(self, p):
