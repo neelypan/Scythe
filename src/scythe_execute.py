@@ -1,5 +1,6 @@
-from sly.yacc import _unique_names
-
+#from sly.yacc import _unique_names
+#Above: 'ImportError: cannot import name "unique_names" from "sly.yacc""'
+#Runs fine for me if removed
 
 class SExecute:
     def __init__(self, tree, names):
