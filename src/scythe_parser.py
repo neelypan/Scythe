@@ -34,6 +34,11 @@ class SParser(Parser):
     @_('SYOUT "(" expr ")" ')
     def statement(self, p):
         return ('syout', p.expr)
+    
+    @_('ID "=" SYIN "(" expr ")" ')
+    def statement(self, p):
+        self.names[p.ID] = p.expr
+        return ('syin', p.ID, p.expr)
 
     @_('expr ">" expr')
     def expr(self, p):
