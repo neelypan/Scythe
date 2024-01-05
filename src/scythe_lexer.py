@@ -5,6 +5,7 @@ class SLexer(Lexer):
     tokens = {ID, NUMBER, STRING, SYOUT, SYIN,
               DATATYPE, STR, INT, IF, ELSE, COMMENT, LESS_OR_EQUAL, GREATER_OR_EQUAL}
     ignore = '\r \t'
+    ignore_comment = r'\//.*'
     literals = {'=', '+', '-', '*', '/',
                 '(', ')', '<', '>', '{', '}'}
 
