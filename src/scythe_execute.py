@@ -1,5 +1,6 @@
-from sly.yacc import _unique_names
-
+#from sly.yacc import _unique_names
+#Above: 'ImportError: cannot import name "unique_names" from "sly.yacc""'
+#Runs fine for me if removed
 
 class SExecute:
     def __init__(self, tree, names):
@@ -61,6 +62,8 @@ class SExecute:
 
         if node[0] == 'syout':
             print(self.walkTree(node[1]))
+        if node[0] == 'syin':
+            self.names[node[1]] = input(self.walkTree(node[2]))
 
         if node[0] == 'datatype':
             data = str(type(self.walkTree(node[1])))
