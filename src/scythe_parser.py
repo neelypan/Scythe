@@ -9,6 +9,7 @@ class SParser(Parser):
     precedence = (
         ('left', '+', '-'),
         ('left', '*', '/'),
+        ('left', 'LESS_OR_EQUAL', 'GREATER_OR_EQUAL'),
         ('right', 'UMINUS', '<', '>'))
 
     def __init__(self):
